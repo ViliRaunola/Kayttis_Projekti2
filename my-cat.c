@@ -6,7 +6,11 @@ void read_File(char *file_name);
 
 int main(int argc, char *argv[]){
 
-    for(int i = 0; i < argc;i++){
+    if(argc == 1){
+        return(0);
+    }
+
+    for(int i = 1; i < argc;i++){
         read_File(argv[i]);
     }
 
@@ -21,7 +25,7 @@ void read_File(char *file_name){
 
     if ((file = fopen(file_name, "r")) == NULL) {
         perror("my-cat: cannot open file");
-        fprintf(stdout,"\n");
+        fprintf(stderr,"\n");
         exit(1);
     }
 
