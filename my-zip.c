@@ -25,6 +25,7 @@ int main(int argc, char *argv[]){
 
 void read_File(char *file_name){
     char *line = NULL;
+    
     size_t buffer_size = 0;
     FILE *file;
 
@@ -46,19 +47,35 @@ void create_Zip(char *line){
 
     int i = 0;
     int counter = 0;
-    char *temp;
-    strcpy(temp, line[i]);
+    char temp = line[i];
+    
 
-    while(line[i] != "\n"){
+    for(){
         
-        if(strcmp(line[i], temp)){
+        if(i == strlen(line)){
+            fwrite(&counter, sizeof(int), 1,stdout);
+            fflush(stdout);
+            printf("%c", temp);
+            fflush(stdout);
+        }
+        if(line[i] == '\n'){
+            break;
+        }
+        
+        if(temp == line[i]){
             counter++;
+            i++;
         }else{
-            fwrite(&counter, 4, 1,stdout);
-            fprintf(stdout, "%s", line[i]);
+            fwrite(&counter, sizeof(int), 1,stdout);
+            fflush(stdout);
+            printf("%c", temp);
+            fflush(stdout);
+            counter = 0;
+            temp = line[i];
         }
 
     }
+
 
 
 }
