@@ -45,9 +45,8 @@ void read_File(char *file_name){
 
 void create_Zip(char *line, ssize_t line_size){
 
-    int i = 0;
     int counter = 0;
-    char temp = line[i];
+    char temp = line[0];
     
 
     for(int j=0;j<=line_size;j++) {
