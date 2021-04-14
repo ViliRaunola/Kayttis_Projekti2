@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 void read_File(char *file_name){
     char *line = NULL;
     size_t buffer_size = 0;
-    FILE *file = NULL;
+    FILE *file;
 
     if ((file = fopen(file_name, "r")) == NULL) {
         perror("my-cat: cannot open file");
