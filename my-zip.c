@@ -4,7 +4,7 @@
 #define  _POSIX_C_SOURCE 200809L
 
 
-void create_Zip(char *line);
+void create_Zip(char *line, ssize_t line_size);
 void read_File(char *file_name);
 
 int main(int argc, char *argv[]){
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
 
 void read_File(char *file_name){
     char *line = NULL;
-    
+    ssize_t line_size;
     size_t buffer_size = 0;
     FILE *file;
 
@@ -35,49 +35,36 @@ void read_File(char *file_name){
         exit(1);
     }
 
-    while(getline(&line, &buffer_size, file) != -1){ 
-        create_Zip(line);
+    while((line_size = getline(&line, &buffer_size, file)) != -1){ 
+        create_Zip(line, line_size);
     }
 
     free(line);
     fclose(file);
 }
 
-void create_Zip(char *line){
+void create_Zip(char *line, ssize_t line_size){
 
     int i = 0;
     int counter = 0;
     char temp = line[i];
     
 
-    for(){
-        
-        if(i == strlen(line)){
-            fwrite(&counter, sizeof(int), 1,stdout);
-            fflush(stdout);
-            printf("%c", temp);
-            fflush(stdout);
-        }
-        if(line[i] == '\n'){
+    for(int j=0;j<=line_size;j++) {
+        if(temp == '\n') {
             break;
         }
-        
-        if(temp == line[i]){
+        if(temp == line[j]){
             counter++;
-            i++;
         }else{
             fwrite(&counter, sizeof(int), 1,stdout);
             fflush(stdout);
             printf("%c", temp);
             fflush(stdout);
-            counter = 0;
-            temp = line[i];
+            counter = 1;
+            temp = line[j];
         }
-
     }
-
-
-
 }
 
 
