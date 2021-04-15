@@ -5,14 +5,12 @@
 
 struct compressed_char_struct
 {
-    int var1;
-    char var2;
+    int binary_no;
+    char character;
 };
 
 
-
-void create_Zip(char *line, ssize_t line_size);
-void read_File(char *file_name);
+void unzip_to_stdout(char *file_name);
 
 int main(int argc, char *argv[]){
 
@@ -22,7 +20,7 @@ int main(int argc, char *argv[]){
     }
 
     for(int i = 1; i < argc;i++){
-        read_File(argv[i]);
+        unzip_to_stdout(argv[i]);
     }
 
     return(0);
@@ -30,7 +28,7 @@ int main(int argc, char *argv[]){
 
 
 
-void read_File(char *file_name){
+void unzip_to_stdout(char *file_name){
     char *line = NULL;
     //ssize_t line_size = 0;
     //size_t buffer_size = 0;
@@ -49,27 +47,14 @@ void read_File(char *file_name){
 
     //How to read file to struct https://overiq.com/c-programming-101/fread-function-in-c/
     while (fread(&compressed_char, 5, 1, file) == 1){
-        printf("%d", compressed_char.var1);
-        printf("%c", compressed_char.var2);
+        printf("%d", compressed_char.binary_no);
+        printf("%c", compressed_char.character);
     }
 
         
-
-/*
-    while((line_size = getline(&line, &buffer_size, file)) != -1){ 
-        unZip(line, line_size);
-    }
-*/
     free(line);
     fclose(file);
 }
-
-/*
-void unZip(char *line){
-
-
-}
-*/
 
 
 /*******************EOF*******************/
