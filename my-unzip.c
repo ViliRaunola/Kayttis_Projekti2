@@ -3,11 +3,12 @@
 #include <stdlib.h>
 #define  _POSIX_C_SOURCE 200809L
 
-typedef struct mystruct_st
+struct compressed_char_struct
 {
-     int var1;
-     char var2;
-}mystruct_t;
+    int var1;
+    char var2;
+};
+
 
 
 void create_Zip(char *line, ssize_t line_size);
@@ -34,8 +35,11 @@ void read_File(char *file_name){
     //ssize_t line_size = 0;
     //size_t buffer_size = 0;
     FILE *file;
+    struct compressed_char_struct compressed_char;
 
     //unsigned char buffer[1];
+
+
 
     if ((file = fopen(file_name, "rb")) == NULL) {
         perror("my-zip: cannot open file");
@@ -43,14 +47,12 @@ void read_File(char *file_name){
         exit(1);
     }
 
-    fread(&mystruct, sizeof(buffer), 1, file);  
+    //How to read file to struct https://overiq.com/c-programming-101/fread-function-in-c/
+    while (fread(&compressed_char, 5, 1, file) == 1){
+        printf("%d", compressed_char.var1);
+        printf("%c", compressed_char.var2);
+    }
 
-/*
-    for(int j=0;j<=0;j++){
-        printf("%u", buffer[j]);
-    } 
-*/
-    printf("%u", buffer[0]);
         
 
 /*
@@ -62,38 +64,12 @@ void read_File(char *file_name){
     fclose(file);
 }
 
+/*
 void unZip(char *line){
 
 
 }
-
-
-
-
-void create_Zip(char *line, ssize_t line_size){
-
-    int counter = 0;
-    char temp = line[0];
-    
-
-    for(int j=0;j<=line_size;j++) {
-        if(temp == '\n') {
-            break;
-        }
-        if(temp == line[j]){
-            counter++;
-        }else{
-            fwrite(&counter, sizeof(int), 1,stdout);
-            fflush(stdout);
-            printf("%c", temp);
-            fflush(stdout);
-            counter = 1;
-            temp = line[j];
-        }
-    }
-}
-
-
+*/
 
 
 /*******************EOF*******************/
