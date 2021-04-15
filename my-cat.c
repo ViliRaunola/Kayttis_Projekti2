@@ -24,8 +24,7 @@ void read_File(char *file_name){
     FILE *file;
 
     if ((file = fopen(file_name, "r")) == NULL) {
-        perror("my-cat: cannot open file");
-        fprintf(stderr,"\n");
+        fprintf(stdout ,"wcat: cannot open file\n"); //The error message differs between assigment and tests
         exit(1);
     }
 
