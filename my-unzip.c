@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#define  _POSIX_C_SOURCE 200809L
 
 struct compressed_char_struct
 {
@@ -41,8 +40,11 @@ void read_Zipped_File(char *file_name){
     }
 
     //How to read file to struct https://overiq.com/c-programming-101/fread-function-in-c/
+    //The size of read bytes is 5 because char takes one byte and integer the remaining four.
     while (fread(&compressed_char, 5, 1, file) == 1)
         unZip(compressed_char.binary_no, compressed_char.character);
+    
+    printf("%ld", sizeof(compressed_char));
         
     free(line);
     fclose(file);
