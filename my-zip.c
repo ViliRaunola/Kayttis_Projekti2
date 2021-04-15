@@ -11,7 +11,7 @@ void read_File(char *file_name);
 int main(int argc, char *argv[]){
 
     if(argc == 1){
-        fprintf(stdout, "my-zip: file1 [file2 ...]\n");
+        fprintf(stdout, "wzip: file1 [file2 ...]\n");   //The error message differs between assigment and tests
         exit(1);
     }
 
@@ -31,8 +31,7 @@ void read_File(char *file_name){
     FILE *file;
 
     if ((file = fopen(file_name, "r")) == NULL) {
-        perror("my-zip: cannot open file");
-        fprintf(stderr,"\n");
+        fprintf(stdout,"wzip: cannot open file\n"); //The error message differs between assigment and tests
         exit(1);
     }
 
@@ -47,11 +46,11 @@ void read_File(char *file_name){
 void create_Zip(char *line, ssize_t line_size){
 
     int counter = 0;
-    char temp = line[0];
+    char previous_character = line[0];
     
 
     for(int j=0;j<=line_size;j++) {
-        if(temp == '\n') {
+        if(previous_character == '\n') {
             counter = 1;
             fwrite(&counter, sizeof(int), 1,stdout);
             fflush(stdout);
@@ -59,17 +58,17 @@ void create_Zip(char *line, ssize_t line_size){
             fflush(stdout);
             break;
         }
-        if(temp == line[j]){
+        if(previous_character == line[j]){
             counter++;
         }else{
             
             fwrite(&counter, sizeof(int), 1,stdout);
             fflush(stdout);
-            printf("%c", temp);
+            printf("%c", previous_character);
             fflush(stdout);
             
             counter = 1;
-            temp = line[j];
+            previous_character = line[j];
             
         }
     }

@@ -10,8 +10,7 @@ void readStdin(char *searchTerm);
 
 int main(int argc, char *argv[]){
     if(argc <= 1){
-        perror("my-grep: searchterm [file ...]");
-        fprintf(stderr,"\n");
+        fprintf(stdout,"wgrep: searchterm [file ...]\n");    //The error message differs between assigment and tests
         exit(1);
     } else if (argc == 2) {
         readStdin(argv[1]);
@@ -20,7 +19,6 @@ int main(int argc, char *argv[]){
     for(int i = 2; i < argc;i++) {
         read_File(argv[1], argv[i]);
     }
-    fprintf(stdout, "\n");
     return(0);
 }
 
@@ -31,8 +29,7 @@ void read_File(char *searchTerm, char *file_name){
     FILE *file;
 
     if ((file = fopen(file_name, "r")) == NULL) {
-        perror("my-grep: cannot open file");
-        fprintf(stderr,"\n");
+        fprintf(stdout,"wgrep: cannot open file\n"); //The error message differs between assigment and tests
         exit(1);
     }
 

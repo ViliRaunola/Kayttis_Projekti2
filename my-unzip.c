@@ -15,7 +15,7 @@ void unZip(int amount, char character);
 int main(int argc, char *argv[]){
 
     if(argc == 1){
-        fprintf(stdout, "my-unzip: file1 [file2 ...]\n");
+        fprintf(stdout, "wunzip: file1 [file2 ...]\n"); //The error message differs between assigment and tests
         exit(1);
     }
 
@@ -34,8 +34,7 @@ void read_Zipped_File(char *file_name){
     struct compressed_char_struct compressed_char;
 
     if ((file = fopen(file_name, "rb")) == NULL) {
-        perror("my-zip: cannot open file");
-        fprintf(stderr,"\n");
+        fprintf(stdout, "my-zip: cannot open file\n"); //The error message differs between assigment and tests
         exit(1);
     }
 
@@ -43,8 +42,6 @@ void read_Zipped_File(char *file_name){
     //The size of read bytes is 5 because char takes one byte and integer the remaining four.
     while (fread(&compressed_char, 5, 1, file) == 1)
         unZip(compressed_char.binary_no, compressed_char.character);
-    
-    printf("%ld", sizeof(compressed_char));
         
     free(line);
     fclose(file);
