@@ -47,13 +47,13 @@ void read_File(char *file_name){
 void create_Zip(char *line, ssize_t line_size){
 
     int counter = 0;
-    int number_one = 1;
     char temp = line[0];
     
 
     for(int j=0;j<=line_size;j++) {
         if(temp == '\n') {
-            fwrite(&number_one, sizeof(int), 1,stdout);
+            counter = 1;
+            fwrite(&counter, sizeof(int), 1,stdout);
             fflush(stdout);
             printf("\n");
             fflush(stdout);
