@@ -10,7 +10,8 @@ struct compressed_char_struct
 };
 
 
-void unzip_to_stdout(char *file_name);
+void read_Zipped_File(char *file_name);
+void unZip(int amount, char character);
 
 int main(int argc, char *argv[]){
 
@@ -20,7 +21,7 @@ int main(int argc, char *argv[]){
     }
 
     for(int i = 1; i < argc;i++){
-        unzip_to_stdout(argv[i]);
+        read_Zipped_File(argv[i]);
     }
 
     return(0);
@@ -28,16 +29,10 @@ int main(int argc, char *argv[]){
 
 
 
-void unzip_to_stdout(char *file_name){
+void read_Zipped_File(char *file_name){
     char *line = NULL;
-    //ssize_t line_size = 0;
-    //size_t buffer_size = 0;
     FILE *file;
     struct compressed_char_struct compressed_char;
-
-    //unsigned char buffer[1];
-
-
 
     if ((file = fopen(file_name, "rb")) == NULL) {
         perror("my-zip: cannot open file");
@@ -46,16 +41,19 @@ void unzip_to_stdout(char *file_name){
     }
 
     //How to read file to struct https://overiq.com/c-programming-101/fread-function-in-c/
-    while (fread(&compressed_char, 5, 1, file) == 1){
-        printf("%d", compressed_char.binary_no);
-        printf("%c", compressed_char.character);
-    }
-
+    while (fread(&compressed_char, 5, 1, file) == 1)
+        unZip(compressed_char.binary_no, compressed_char.character);
         
     free(line);
     fclose(file);
 }
 
+void unZip(int amount, char character){
+    for(int i = 0; i < amount; i++ )
+        printf("%c", character);
+    
+
+}
 
 /*******************EOF*******************/
 
