@@ -3,11 +3,6 @@
 #include <stdlib.h>
 #define  _POSIX_C_SOURCE 200809L
 
-struct mystruct_st
-{
-    int var1;
-    char var2;
-};
 
 
 void create_Zip(char *line, ssize_t line_size);
@@ -54,7 +49,6 @@ void create_Zip(char *line, ssize_t line_size){
     int counter = 0;
     int number_one = 1;
     char temp = line[0];
-    //struct mystruct_st mystruct;
     
 
     for(int j=0;j<=line_size;j++) {
@@ -74,11 +68,6 @@ void create_Zip(char *line, ssize_t line_size){
             printf("%c", temp);
             fflush(stdout);
             
-           /*
-            mystruct.var1 = counter;
-            mystruct.var2 = temp;
-            fwrite(&mystruct, sizeof(struct mystruct_st), 1, stdout);
-            */
             counter = 1;
             temp = line[j];
             
