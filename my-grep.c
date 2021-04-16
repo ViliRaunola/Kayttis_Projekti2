@@ -70,3 +70,4 @@ void readStdin(char *searchTerm) {
     }
     free(line);
 }
+/*******************EOF*******************/
