@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#define  _POSIX_C_SOURCE 200809L
 
-void create_Zip(char *line, ssize_t line_size);
 void create_Tempfile(char *file_name, FILE *fp_tempFile);
 void compress_File(FILE *file);
 
@@ -72,6 +70,7 @@ void compress_File(FILE *file){
         exit(1);
     }
 
+    //Reads the file character by character using fgetc. Source: https://www.tutorialspoint.com/c_standard_library/c_function_fgetc.htm
     c = fgetc(file);
     pre_char = c;
 
@@ -97,40 +96,5 @@ void compress_File(FILE *file){
 
     fclose(file);
 }
-
-
-/*
-
-void create_Zip(char *line, ssize_t line_size){
-    int counter = 0;
-    char previous_character = line[0];
-    
-
-    for(int j=0;j<=line_size;j++) {
-        if(previous_character == '\n') {
-            counter = 1;
-            fwrite(&counter, sizeof(int), 1,stdout);
-            fflush(stdout);
-            printf("\n");
-            fflush(stdout);
-            break;
-        }
-        if(previous_character == line[j]){
-            counter++;
-        }else{
-            
-            fwrite(&counter, sizeof(int), 1,stdout);
-            fflush(stdout);
-            printf("%c", previous_character);
-            fflush(stdout);
-            
-            counter = 1;
-            previous_character = line[j];
-            
-        }
-    }
-  
-}
-  */
 
 /*******************EOF*******************/
