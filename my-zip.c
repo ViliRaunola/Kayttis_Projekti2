@@ -27,13 +27,17 @@ int main(int argc, char *argv[]){
         FILE *fp;
         if ((fp = fopen(argv[1], "r")) == NULL) {
             fprintf(stdout,"wzip: cannot open file\n"); //The error message differs between assigment and tests
+            // perror("my-zip: cannot open file");
             exit(1);
         }
         //Reads and zips the given file
         compress_File(fp);
     }else{
         //How to initialize temporary file in c: https://www.geeksforgeeks.org/tmpfile-function-c/
-        FILE *fp_tempFile = tmpfile(); 
+        FILE *fp_tempFile;
+        if((fp_tempFile = tmpfile()) == NULL) {
+            perror("my-zip: cannot create temp file");
+        }
 
         //Reading all the given files to a temporary file
         for(int i = 1; i < argc;i++){
@@ -59,6 +63,7 @@ void create_Tempfile(char *file_name, FILE *fp_tempFile){
 
     if ((file = fopen(file_name, "r")) == NULL) {
         fprintf(stdout,"wzip: cannot open file\n"); //The error message differs between assigment and tests
+        // perror("my-zip: cannot open file");
         exit(1);
     }
 
@@ -82,7 +87,7 @@ void compress_File(FILE *file){
 
     //Checks if the is empty or not.
     if(feof(file)){
-        fprintf(stderr,"wzip: the file is empty\n"); 
+        perror("wzip: the file is empty"); 
         exit(1);
     }
 

@@ -17,6 +17,7 @@ int main(int argc, char *argv[]){
     /* no command-line arguments passed */
     if(argc <= 1){
         fprintf(stdout,"wgrep: searchterm [file ...]\n");    //The error message differs between assigment and tests
+        // perror("my-grep: searchterm [file ...]");
         exit(1);
     /* Only search term is passed */
     } else if (argc == 2) {
@@ -42,6 +43,7 @@ void read_File(char *searchTerm, char *file_name){
 
     if ((file = fopen(file_name, "r")) == NULL) {
         fprintf(stdout,"wgrep: cannot open file\n"); //The error message differs between assigment and tests
+        // perror("my-grep: cannot open file");
         exit(1);
     }
     /* getline returns -1 on failure to read  (including end-of-file condition)*/

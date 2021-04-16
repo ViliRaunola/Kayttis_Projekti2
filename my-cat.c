@@ -33,6 +33,7 @@ void read_File(char *file_name){
 
     if ((file = fopen(file_name, "r")) == NULL) {
         fprintf(stdout ,"wcat: cannot open file\n"); //The error message differs between assignment and tests
+        // perror("my-cat: cannot open file");
         exit(1);
     }
     /* getline returns -1 on failure to read  (including end-of-file condition)*/
